@@ -1,7 +1,7 @@
 ---
 title: "Assignment 6 Report"
-author: "Taylor Falk"
-date: "1/24/2022"
+author: "Reem Rasmy"
+date: "3/28/2026"
 output: html_document
 ---
 
@@ -23,6 +23,11 @@ Finally, close out, your page should look like this final image. Proceed to star
 ![](mkd_img/scc3.png)
 
 If you like aesthetics, feel free to remove the above warning section from your final report.
+```{r}
+# Download necessary packages
+BiocManager::install(c("edgeR", "limma"))
+install.packages("ggVennDiagram")
+```
 
 ## Setup
 ```{r Packages + setup, }
@@ -67,7 +72,7 @@ head(edger_res, 3)
 edger_res$padj <- p.adjust(edger_res$PValue, 
                            method = 'BH', 
                            n = length(edger_res$PValue))
-cat("edger _with_ padj:")
+cat("edger _with_ padj:") 
 head(edger_res, 3)
 ```
 
@@ -123,7 +128,8 @@ combine_pval(deseq_res, edger_res, limma_res) %>%
 Use `create_facets()` and `theme_plot()` to create the final plot.
 ```{r Final plot, fig.align='center', fig.cap='Figure 3 - A volcano plot of the top 1,000 genes (ranked by p-value) comparing the log<sub>2</sub> fold-change with the adjusted p-value. Adjusted p-values above 1e-100 are highlighted in red.'}
 facets <- create_facets(deseq_res, edger_res, limma_res)
-theme_plot(facets)
+
+print(theme_plot(facets))
 ```
 
 
