@@ -298,8 +298,8 @@ create_facets <- function(deseq, edger, limma) {
 theme_plot <- function(volcano_data) {
   
   ggplot(volcano_data, aes(x = logFC, y = -log10(padj))) +
-    geom_point(aes(color = padj < 0.01)) +
-    scale_color_manual(values = c("gray", "red")) +
+    geom_point(aes(color = padj < 1e-100)) +
+    scale_color_manual(values = c("black", "red")) +
     facet_wrap(~ package) +
     theme_bw() +
     labs(
